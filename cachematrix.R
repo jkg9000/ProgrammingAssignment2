@@ -11,28 +11,29 @@
 
 makeCacheMatrix <- function(x = matrix()) {
     
-    ## clear out matInv, as a new matrix is being passed in
+    ## clear out xInv, as a new matrix is being passed in
     xInv <- NULL
     
     # set a new matrix, store in cache
     set <- function(y) {
         
-        ## matInit is the passed-in matrix that will be stored and referenced
+        ## y is the passed-in matrix that will be stored and referenced as x
         x <<- y
         
-        ## matInv will hold the inverse of matInit
-        ## when matInit is replaced (as above), clear out matInv, 
+        ## xInv will hold the inverse of x
+        ## when x is replaced (as above), clear out xInv, 
         ## otherwise it will still hold the inverse of the *previous* matrix.
         xInv <<- NULL
     }
     
-    ## get() returns the original, non-inverted matrix
+    ## get() returns the stored, non-inverted matrix
     get <- function() x
     
-    ## setInv() sets the passed-in matrix as matInv, the inversed matrix
+    ## setInv() sets the passed-in matrix as x, the inversed matrix
+    ## note:  this does not create/process the inverse matrix, it just stores it
     setInv <- function(inv) xInv <<- inv
     
-    ## getInv() returns the inversed matrix, matInv, from the cache
+    ## getInv() returns the inversed matrix, xInv, from the cache
     getInv <- function() xInv
     
     list(set = set, get = get,
